@@ -1,0 +1,3 @@
+Fornavn;Etternavn;Tittel
+Smart;Ness;Sjef
+Arne;Brimi;Kokk
