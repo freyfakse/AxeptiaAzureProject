@@ -5,7 +5,8 @@ using System.Linq;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
-
+using System.Text.Json;
+using Microsoft.Azure.ServiceBus;
 
 namespace Axeptia.Function
 {
@@ -25,7 +26,7 @@ namespace Axeptia.Function
 
 
 
-            List<LineItem> itemList = null;
+            List<LineItem> items = null;
             string line;
 
             System.IO.StreamReader file = new System.IO.StreamReader(@"E:\Backup\Github\AxeptiaAzureProject\personnel.txt");
@@ -35,15 +36,20 @@ namespace Axeptia.Function
 
                 int i = 0;
 
-                itemList[i].firstName = lineList[0];
-                itemList[i].lastName = lineList[1];
-                itemList[i].title = lineList[2];
+                items[i].firstName = lineList[0];
+                items[i].lastName = lineList[1];
+                items[i].title = lineList[2];
 
                 i++;
             }
-            itemList.RemoveAt(0);//remove header element
-
             file.Close();
+
+            items.RemoveAt(0);//remove header element
+
+            var json = JsonSerializer.Serialize(items);
+
+            //TODO publish json file
+
         }
     }
 }
