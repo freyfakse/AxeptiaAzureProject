@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.ServiceBus;
 
 
-namespace AxeptiaAzureProject
+namespace Axeptia.Function
 {
     public class Publisher
     {
@@ -13,8 +13,11 @@ namespace AxeptiaAzureProject
         const string TopicName = "personnelinfo";
         static ITopicClient topicClient;
 
-        public Publisher() { }
+        public Publisher() 
+        {
 
+        }
+/*
         public static async Task navn()
         {
             const int numberOfMessages = 1;
@@ -55,6 +58,6 @@ namespace AxeptiaAzureProject
                 Console.WriteLine($"{DateTime.Now} :: Exception: {exception.Message}");
             }
         }
-
+*/
     }
 }
