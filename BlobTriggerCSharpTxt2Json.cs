@@ -17,53 +17,28 @@ namespace Axeptia.Function
         {
             log.LogInformation($"C# Blob trigger function Processed blob\n Name:{name} \n Size: {myBlob.Length} Bytes");
 
+            var Reader = new StreamReader(myBlob);
+            var fileAsString = Reader.ReadToEnd();
+            Reader.Close();
 
+            //log.LogInformation("fileAsString: " +fileAsString);
 
-            //TxtToJsonConverter MyConverter = new TxtToJsonConverter();
+            Publisher Publisher = new Publisher();
+            Converter Converter = new Converter();
 
-            //MyConverter.TxtToList("fornavn;etternavn;tittel;hans;gretesen;kokk");
+            List<LineItem> personnel = Converter.StringToList(fileAsString);
+
+            //Converter.ListToJson(personnel);
 
             
-            
 
+            String json = JsonSerializer.Serialize(personnel);
 
-            List<LineItem> items = new List<LineItem>();
-            //items.Add(li);
-            string line;
+             log.LogInformation(json);
 
-            List<string> lineList = new List<string>();
-
-            //System.IO.StreamReader file = new System.IO.StreamReader(@"E:\Backup\Github\AxeptiaAzureProject\personnel.txt");
-/*
-            while ((line = name.ReadLine()) != null)
-            {
-                lineList = line.Split(";").ToList();
-
-                int i = 0;
-
-                LineItem li = new LineItem();
-                items.Add(li);
-
-                items[i].firstName = lineList[0];
-                items[i].lastName = lineList[1];
-                items[i].title = lineList[2];
-                log.LogInformation(items[i].firstName +items[i].lastName +items[i].title);
-
-                i++;
-            }
-
-            log.LogInformation(items[0].firstName +" " +items[0].lastName +" " +items[0].title);
-
-
-
-            file.Close();
-*/
-            items.RemoveAt(0);//remove header element
-
-            var json = JsonSerializer.Serialize(items);
 
             //TODO publish json file
-            Publisher MessageSender = new Publisher();
+
 
             log.LogInformation($"End of program");
         }
