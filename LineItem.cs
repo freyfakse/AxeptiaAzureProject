@@ -1,10 +1,15 @@
+using System.Text.Json.Serialization;
+
 namespace Axeptia.Function
 {
     public class LineItem
     {
-        public string firstName;
-        public string lastName;
-        public string title; 
+        [JsonPropertyName("Fornavn")]
+        public string firstName {get;set;} 
+        [JsonPropertyName("Etternavn")]
+        public string lastName {get;set;} 
+        [JsonPropertyName("Tittel")]
+        public string title {get;set;} 
         public LineItem()
         {
 
