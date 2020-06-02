@@ -39,14 +39,7 @@ namespace Axeptia.Function
         static async Task SendMessage(string jsonFileName)
         {
             try
-            {/*
-                for (var i = 0; i < numberOfMessagesToSend; i++)
-                {
-                    
-                }*/
-                // Create a new message to send to the topic.
-                    //string messageBody = $"Message test";
-
+            {
                     var messageBody = jsonFileName;
                     var message = new Message(Encoding.UTF8.GetBytes(messageBody));
                     //var message = new Message(Encoding.UTF8.GetBytes(messageBody));
