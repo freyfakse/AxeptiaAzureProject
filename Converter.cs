@@ -2,7 +2,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using System.Text.Json;
-using Microsoft.Extensions.Logging;
+using System.Text.RegularExpressions;
 
 namespace Axeptia.Function
 {
@@ -17,6 +17,9 @@ namespace Axeptia.Function
         {
 
             List<LineItem> items = new List<LineItem>();
+
+
+            fileAsString = Regex.Replace(fileAsString, @"\n", "");
 
             List<string> personnelList = fileAsString.Split('\r').ToList();
 
@@ -38,9 +41,9 @@ namespace Axeptia.Function
 
         public string ListToJsonFile(List<LineItem> personnel)
         {
-            String json = Newtonsoft.Json.JsonConvert.SerializeObject(personnel);//JsonSerializer.Serialize(personnel); returns empty json
+            String json = JsonSerializer.Serialize(personnel);
 
-            string jsonFileName = "personneljson.json";
+            //string jsonFileName = "personneljson.json";
             
             //System.IO.File.WriteAllText(@jsonFileName, json);
 
